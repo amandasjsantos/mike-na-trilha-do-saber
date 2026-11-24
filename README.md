@@ -99,7 +99,7 @@ python app.py
 ## 🖥️ Demonstração
 
 - GitHub Pages (apresentação): https://amandasjsantos.github.io/mike-na-trilha-do-saber/
-- Sistema completo (PythonAnywhere):
+- Sistema completo (PythonAnywhere): https://amandasjsantos.pythonanywhere.com
 
 ## 📋 Documentação
 
