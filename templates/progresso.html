@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block titulo %}Progresso · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<h1>Seu Progresso</h1>
+
+<div class="abas">
+  <button type="button" class="aba-botao ativo" data-aba="geral">Visão Geral</button>
+  <button type="button" class="aba-botao" data-aba="habilidades">Habilidades</button>
+  <button type="button" class="aba-botao" data-aba="historico">Histórico</button>
+</div>
+
+<section class="aba ativa" id="aba-geral">
+  <div class="grade-3">
+    <div class="cartao"><h3>Nível atual</h3><p class="numero">{{ usuario.nivel_atual or '—' }}</p><p class="suave">{{ NOMES_NIVEL.get(usuario.nivel_atual, 'Faça o teste de nível') }}</p></div>
+    <div class="cartao"><h3>🔥 Sequência</h3><p class="numero">{{ sequencia }} <small>{{ 'dia' if sequencia == 1 else 'dias' }}</small></p></div>
+    <div class="cartao"><h3>⭐ XP total</h3><p class="numero">{{ usuario.xp_total }}</p></div>
+  </div>
+  <div class="grade-2">
+    <div class="cartao">
+      <h3>Atividades respondidas</h3>
+      <p class="numero">{{ resumo.total }}</p>
+      <p class="suave">{{ resumo.acertos }} acertos{% if resumo.total %} ({{ resumo.acertos * 100 // resumo.total }}%){% endif %}</p>
+    </div>
+    <div class="cartao">
+      <h3>Plano de estudos</h3>
+      {% if plano %}
+        <p class="suave">{{ feitas_plano }} de {{ total_plano }} atividades concluídas</p>
+        <div class="barra"><div style="width: {{ (feitas_plano * 100 // total_plano) if total_plano else 0 }}%"></div></div>
+      {% else %}<p class="suave">Sem plano ativo.</p>{% endif %}
+    </div>
+  </div>
+  <div class="cartao">
+    <h3>Evolução: XP ganho nos últimos 7 dias</h3>
+    <div class="grafico">
+      {% for rotulo, xp in grafico %}
+        <div class="coluna"><span class="valor">{{ xp }}</span><div class="coluna-barra" style="height: {{ xp * 100 // maior }}%"></div><span>{{ rotulo }}</span></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="aba" id="aba-habilidades">
+  <div class="cartao">
+    <h3>Desempenho por habilidade</h3>
+    {% for tipo, nome in NOMES_TIPO.items() %}
+      {% set h = habilidades[tipo] %}
+      <div class="habilidade">
+        <div class="habilidade-topo"><strong>{{ nome }}</strong>
+          <span class="suave">{% if h.total %}{{ h.acertos }}/{{ h.total }} acertos ({{ h.acertos * 100 // h.total }}%){% else %}nenhuma atividade ainda{% endif %}</span></div>
+        <div class="barra"><div style="width: {{ (h.acertos * 100 // h.total) if h.total else 0 }}%"></div></div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="aba" id="aba-historico">
+  <div class="cartao">
+    <h3>Testes de nível</h3>
+    {% if testes %}
+    <table><tr><th>Data</th><th>Acertos</th><th>Nível</th></tr>
+      {% for t in testes %}<tr><td>{{ t.data|data_br }}</td><td>{{ t.pontuacao }}/20</td><td>{{ t.nivel_resultado }}</td></tr>{% endfor %}
+    </table>
+    {% else %}<p class="suave">Nenhum teste realizado ainda.</p>{% endif %}
+  </div>
+  <div class="cartao">
+    <h3>Últimas atividades</h3>
+    {% if historico %}
+    <table><tr><th>Data</th><th>Atividade</th><th>Tipo</th><th>Resultado</th><th>XP</th></tr>
+      {% for h in historico %}<tr><td>{{ h.data|data_br }}</td><td>{{ h.titulo }}</td><td>{{ NOMES_TIPO[h.tipo] }}</td>
+        <td>{{ '✅ Acertou' if h.acertou else '❌ Errou' }}</td><td>+{{ h.xp_ganho }}</td></tr>{% endfor %}
+    </table>
+    {% else %}<p class="suave">Você ainda não respondeu nenhuma atividade. Comece pelo seu plano!</p>{% endif %}
+  </div>
+</section>
+{% endblock %}

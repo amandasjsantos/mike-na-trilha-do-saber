@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block titulo %}Mike na Trilha do Saber{% endblock %}</title>
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+</head>
+<body>
+
+{% macro mensagens() %}
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% if msgs %}<div class="mensagens">
+      {% for categoria, texto in msgs %}<div class="alerta alerta-{{ categoria }}">{{ texto }}</div>{% endfor %}
+    </div>{% endif %}
+  {% endwith %}
+{% endmacro %}
+
+{% if usuario %}
+  <div class="app">
+    <aside class="menu-lateral">
+      <a href="{{ url_for('painel') }}">{% include '_logo.html' %}</a>
+      <nav>
+        {% set itens = [('painel','🏠','Início'), ('meu_plano','📅','Meu Plano'), ('teste_intro','📝','Teste de Nível'),
+                        ('progresso','📈','Progresso'), ('conquistas','🏅','Conquistas'), ('mike','🐶','Mike'),
+                        ('perfil','👤','Meu Perfil')] %}
+        {% for endpoint, icone, nome in itens %}
+          <a href="{{ url_for(endpoint) }}" class="{{ 'ativo' if request.endpoint == endpoint or (endpoint == 'teste_intro' and (request.endpoint or '').startswith('teste_')) }}">
+            <span>{{ icone }}</span> {{ nome }}</a>
+        {% endfor %}
+      </nav>
+      <form method="post" action="{{ url_for('sair') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <button type="submit" class="botao-sair">↩ Sair</button>
+      </form>
+    </aside>
+    <main class="principal">
+      {{ mensagens() }}
+      {% block conteudo_aluno %}{% endblock %}
+    </main>
+  </div>
+{% else %}
+  <header class="topo">
+    <a href="{{ url_for('index') }}">{% include '_logo.html' %}</a>
+    <nav>
+      <ul>
+        <li><a href="{{ url_for('index') }}#inicio">Início</a></li>
+        <li><a href="{{ url_for('index') }}#sobre">Sobre</a></li>
+        <li><a href="{{ url_for('index') }}#recursos">Recursos</a></li>
+        <li><a href="{{ url_for('index') }}#duvidas">Dúvidas</a></li>
+      </ul>
+      <div class="topo-acoes">
+        <a href="{{ url_for('login') }}" class="botao botao-contorno">Entrar</a>
+        <a href="{{ url_for('cadastro') }}" class="botao botao-dourado">Cadastre-se</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    {{ mensagens() }}
+    {% block conteudo_publico %}{% endblock %}
+  </main>
+  <footer class="rodape">
+    <ul>
+      <li><a href="{{ url_for('index') }}#inicio">Início</a></li>
+      <li><a href="{{ url_for('index') }}#sobre">Sobre</a></li>
+      <li><a href="{{ url_for('index') }}#recursos">Recursos</a></li>
+      <li><a href="{{ url_for('index') }}#duvidas">Dúvidas</a></li>
+    </ul>
+    <span>© 2026 Mike na Trilha do Saber</span>
+  </footer>
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

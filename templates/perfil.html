@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block titulo %}Meu Perfil · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<h1>Meu Perfil</h1>
+<div class="cartao perfil">
+  <div class="avatar">{{ usuario.nome[0]|upper }}</div>
+  <div>
+    <h2>{{ usuario.nome }}</h2>
+    <p class="suave">Estudante</p>
+    <table>
+      <tr><th>E-mail</th><td>{{ usuario.email }}</td></tr>
+      <tr><th>Nível atual</th><td>{{ usuario.nivel_atual or 'Ainda não definido' }}{% if usuario.nivel_atual %} · {{ NOMES_NIVEL[usuario.nivel_atual] }}{% endif %}</td></tr>
+      <tr><th>XP total</th><td>{{ usuario.xp_total }}</td></tr>
+    </table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titulo %}Cadastro · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_publico %}
+<section class="auth">
+  <div class="auth-form cartao">
+    <h1>Crie sua conta</h1>
+    <p class="suave">É rápido e gratuito!</p>
+    <form method="post" action="{{ url_for('cadastro') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <label>Nome completo
+        <input type="text" name="nome" value="{{ nome }}" required minlength="2" maxlength="80" placeholder="Digite seu nome completo">
+      </label>
+      <label>E-mail
+        <input type="email" name="email" value="{{ email }}" required maxlength="120" placeholder="Digite seu e-mail">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" required minlength="6" placeholder="Mínimo de 6 caracteres">
+      </label>
+      <button class="botao botao-dourado botao-cheio" type="submit">Cadastrar</button>
+    </form>
+  </div>
+  <div class="palco claro">
+    <img src="{{ url_for('static', filename='img/mike_comemoracoes.png') }}" alt="Mike comemorando">
+  </div>
+</section>
+{% endblock %}

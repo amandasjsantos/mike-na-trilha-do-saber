@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block conteudo_publico %}
+<section class="hero" id="inicio">
+  <div class="hero-texto">
+    <h1>Seu futuro<br>fala inglês!</h1>
+    <p>Plataforma educacional gratuita para aprender inglês com testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e o Mike, seu mascote e assistente virtual.</p>
+    <a href="{{ url_for('cadastro') }}" class="botao botao-dourado botao-grande">Começar agora</a>
+  </div>
+  <div class="palco">
+    <img src="{{ url_for('static', filename='img/mike_boas_vindas.png') }}" alt="Mike acenando: Olá!">
+  </div>
+</section>
+
+<section class="secao sobre" id="sobre">
+  <h3>Sobre o Mike na Trilha do Saber</h3>
+  <p>O Mike na Trilha do Saber é uma plataforma web educacional gratuita que utiliza tecnologia e inteligência artificial para ajudar pessoas a aprender inglês de forma acessível, organizada e motivadora. Por meio de testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e suporte inteligente, o projeto busca tornar o aprendizado mais eficiente.</p>
+  <p>Nossa visão é democratizar o acesso ao ensino de inglês, oferecendo uma ferramenta gratuita que ajude estudantes a superar dificuldades de organização, falta de motivação e limitações financeiras. Em cada passo da jornada, o Mike, nosso mascote e assistente virtual, acompanha o aluno e torna o aprendizado mais leve e divertido.</p>
+</section>
+
+<section class="recursos" id="recursos">
+  <div><span>📝</span><h3>Testes de Nível</h3><p>Descubra seu nível, de A1 a C1.</p></div>
+  <div><span>📅</span><h3>Planos Personalizados</h3><p>Estude no seu ritmo.</p></div>
+  <div><span>📈</span><h3>Progresso</h3><p>Acompanhe sua evolução.</p></div>
+  <div><span>🏅</span><h3>Gamificação</h3><p>XP, sequências e conquistas.</p></div>
+  <div><span>🐶</span><h3>Assistente Mike</h3><p>Tire dúvidas de inglês.</p></div>
+</section>
+
+<section class="secao faq" id="duvidas">
+  <h3>Dúvidas Frequentes</h3>
+
+  <details>
+    <summary>Quem é o Mike?</summary>
+    <p>O Mike é o mascote e assistente virtual da plataforma. Ele atua como um companheiro de estudos amigável, auxiliando os alunos durante toda a sua jornada.</p>
+  </details>
+
+  <details>
+    <summary>Qual é o diferencial do projeto?</summary>
+    <p>É uma plataforma web educacional gratuita, que utiliza tecnologia e inteligência artificial, criada com o intuito de ensinar inglês, reunindo em um só lugar testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e suporte inteligente.</p>
+  </details>
+
+  <details>
+    <summary>O projeto é gratuito?</summary>
+    <p>Sim, 100% gratuito.</p>
+  </details>
+
+  <details>
+    <summary>Quais tecnologias foram utilizadas?</summary>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>Python + Flask</li>
+      <li>SQLite</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Qual é o foco do ensino de inglês na plataforma?</summary>
+    <p>A plataforma oferece um ensino amplo de inglês, abrangendo situações formais e informais, do dia a dia ao ambiente acadêmico e profissional, sem focar em uma área específica.</p>
+  </details>
+
+  <details>
+    <summary>Como os custos da inteligência artificial serão pagos?</summary>
+    <p>Como o projeto tem um orçamento limitado, o uso da inteligência artificial será reduzido ao necessário para o funcionamento do Mike. Para ajudar a pagar os custos da plataforma, o projeto busca possíveis parcerias com escolas de idiomas e instituições especializadas, como o CIL.</p>
+  </details>
+</section>
+{% endblock %}

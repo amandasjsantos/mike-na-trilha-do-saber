@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_publico %}
+<section class="auth">
+  <div class="auth-form cartao">
+    <h1>Bem-vindo de volta!</h1>
+    <p class="suave">Faça login para continuar sua jornada.</p>
+    <form method="post" action="{{ url_for('login') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      <label>E-mail
+        <input type="email" name="email" value="{{ email }}" required placeholder="seu@email.com">
+      </label>
+      <label>Senha
+        <input type="password" name="senha" required placeholder="Digite sua senha">
+      </label>
+      <button class="botao botao-dourado botao-cheio" type="submit">Entrar</button>
+    </form>
+    <p class="centro suave">Ainda não tem conta? <a href="{{ url_for('cadastro') }}">Cadastre-se grátis</a></p>
+  </div>
+  <div class="palco claro">
+    <img src="{{ url_for('static', filename='img/mike_incentivo_aos_estudos.png') }}" alt="Mike incentivando: Você consegue!">
+  </div>
+</section>
+{% endblock %}

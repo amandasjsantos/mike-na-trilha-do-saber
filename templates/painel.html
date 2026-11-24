@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block titulo %}Início · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<div class="cabecalho-mike">
+  <div>
+    <h1>Olá, {{ usuario.nome.split()[0] }}! 👋</h1>
+    <p class="suave">Você está no nível <strong>{{ usuario.nivel_atual or 'ainda não definido' }}</strong>. Vamos estudar hoje?</p>
+  </div>
+  <img class="mike-img" style="height:190px" src="{{ url_for('static', filename='img/mike_incentivo_aos_estudos.png') }}" alt="Mike incentivando os estudos">
+</div>
+
+<div class="grade-2">
+  <div class="cartao">
+    <h3>⭐ Seu XP</h3>
+    <p class="numero">{{ usuario.xp_total }} <small>XP</small></p>
+    <div class="barra"><div style="width: {{ (usuario.xp_total % 100) }}%"></div></div>
+    <p class="suave">Próxima meta: {{ meta_xp }} XP</p>
+  </div>
+  <div class="cartao">
+    <h3>🔥 Sequência de estudos</h3>
+    <p class="numero">{{ sequencia }} <small>{{ 'dia' if sequencia == 1 else 'dias' }}</small></p>
+    <div class="semana">
+      {% for rotulo, estudou in semana %}<span class="{{ 'feito' if estudou }}">{{ rotulo }}</span>{% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="grade-2">
+  <div class="cartao">
+    <h3>📅 Meu Plano</h3>
+    {% if plano %}
+      <p class="suave">{{ feitas }} de {{ total }} atividades concluídas</p>
+      <div class="barra"><div style="width: {{ (feitas * 100 // total) if total else 0 }}%"></div></div>
+      <a href="{{ url_for('meu_plano') }}" class="botao botao-dourado">Continuar estudos</a>
+    {% elif usuario.nivel_atual %}
+      <p class="suave">Você ainda não criou seu plano de estudos.</p>
+      <a href="{{ url_for('meu_plano') }}" class="botao botao-dourado">Criar meu plano</a>
+    {% else %}
+      <p class="suave">Faça o teste de nível para receber seu plano.</p>
+      <a href="{{ url_for('teste_intro') }}" class="botao botao-dourado">Fazer o teste</a>
+    {% endif %}
+  </div>
+  <div class="cartao">
+    <h3>📝 Teste de Nível</h3>
+    <p class="suave">{{ 'Quer atualizar seu nível? Refaça o teste quando quiser.' if usuario.nivel_atual else 'Descubra seu nível de inglês em cerca de 15 minutos.' }}</p>
+    <a href="{{ url_for('teste_intro') }}" class="botao botao-contorno-escuro">{{ 'Refazer teste' if usuario.nivel_atual else 'Fazer teste' }}</a>
+  </div>
+</div>
+
+<div class="cartao">
+  <h3>🏅 Conquistas recentes</h3>
+  {% if conquistas_recentes %}
+    <div class="lista-medalhas">{% for c in conquistas_recentes %}<span class="medalha-mini">{{ c.icone }} {{ c.nome }}</span>{% endfor %}</div>
+  {% else %}<p class="suave">Você ainda não tem conquistas. Complete atividades para ganhar a primeira!</p>{% endif %}
+</div>
+<p class="frase">“{{ frase }}” <strong>— Mike 🐾</strong></p>
+{% endblock %}

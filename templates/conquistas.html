@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Conquistas · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<div class="cabecalho-mike">
+  <div>
+    <h1>Suas Conquistas</h1>
+    <p class="suave">Complete desafios, ganhe XP e desbloqueie medalhas. Você já tem {{ ganhas }} de {{ lista|length }}.</p>
+  </div>
+  <img class="mike-img" style="height:190px" src="{{ url_for('static', filename='img/mike_conquistas.png') }}" alt="Mike com o troféu">
+</div>
+<div class="grade-medalhas">
+  {% for c in lista %}
+    <div class="medalha {{ 'bloqueada' if not c.data }}">
+      <div class="medalha-icone">{{ c.icone }}</div>
+      <strong>{{ c.nome }}</strong>
+      <small>{{ c.descricao }}</small>
+      <small class="suave">{% if c.data %}Ganha em {{ c.data|data_br }}{% else %}🔒 Bloqueada{% endif %}</small>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

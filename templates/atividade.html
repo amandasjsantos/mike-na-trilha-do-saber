@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo %}{{ item.titulo }} · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<p><a href="{{ url_for('meu_plano') }}">← Voltar ao plano</a></p>
+<div class="cartao">
+  <span class="tag">{{ NOMES_TIPO[item.tipo] }}</span> <span class="suave">+{{ item.xp }} XP</span>
+  <h1>{{ item.titulo }}</h1>
+  <h2 class="enunciado">{{ item.enunciado }}</h2>
+
+  {% if anterior %}
+    <div class="com-mascote">
+      <div>
+        <div class="alerta {{ 'alerta-sucesso' if anterior.acertou else 'alerta-erro' }}">
+          {% if anterior.acertou %}✅ Correto! Você ganhou {{ anterior.xp_ganho }} XP.{% else %}❌ Não foi dessa vez.{% endif %}
+        </div>
+        <p>Sua resposta: <strong>{{ anterior.resposta_usuario }}</strong></p>
+        {% if not anterior.acertou %}<p>Resposta correta: <strong>{{ item.resposta.replace('|', ' ou ') }}</strong></p>{% endif %}
+        <p class="explicacao">💡 {{ item.explicacao }}</p>
+      </div>
+      <img class="mike-img" style="height:210px" src="{{ url_for('static', filename='img/mike_acertos.png' if anterior.acertou else 'img/mike_erros.png') }}" alt="Mike">
+    </div>
+    <a href="{{ url_for('meu_plano') }}" class="botao botao-dourado">Voltar ao plano</a>
+  {% else %}
+    <form method="post" action="{{ url_for('atividade', item_id=item.item_id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+      {% if opcoes %}
+        {% for opcao in opcoes %}
+          <label class="opcao"><input type="radio" name="resposta" value="{{ opcao }}" required> <span>{{ opcao }}</span></label>
+        {% endfor %}
+      {% else %}
+        <input type="text" name="resposta" required maxlength="200" autocomplete="off" placeholder="Digite sua resposta em inglês">
+      {% endif %}
+      <button class="botao botao-dourado" type="submit">Enviar resposta</button>
+    </form>
+  {% endif %}
+</div>
+{% endblock %}

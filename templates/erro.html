@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block conteudo_publico %}{% block conteudo_aluno %}
+<div class="cartao centro vazio">
+  <img class="mike-img" style="height:190px" src="{{ url_for('static', filename='img/mike_erros.png') }}" alt="Mike triste">
+  <h1>{{ codigo }}</h1>
+  <p>{{ mensagem }}</p>
+  <a href="{{ url_for('index') }}" class="botao botao-dourado">Voltar ao início</a>
+</div>
+{% endblock %}{% endblock %}

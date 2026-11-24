@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block titulo %}Meu Plano · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<h1>Meu Plano de Estudos</h1>
+
+{% if not usuario.nivel_atual %}
+  <div class="cartao vazio">
+    <img class="mike-img" style="height:170px" src="{{ url_for('static', filename='img/mike_duvidas.png') }}" alt="Mike com uma dúvida">
+    <p>Você ainda não fez o teste de nível, e é ele que define o seu plano.</p>
+    <a href="{{ url_for('teste_intro') }}" class="botao botao-dourado">Fazer o teste de nível</a>
+  </div>
+{% elif not plano %}
+  <div class="cartao">
+    <p>Você ainda não tem um plano. Escolha sua disponibilidade (nível {{ usuario.nivel_atual }}):</p>
+    {% set dias_padrao = 3 %}{% set minutos_padrao = 30 %}{% set texto_botao = 'Criar meu plano de estudos' %}
+    {% include '_form_plano.html' %}
+  </div>
+{% else %}
+  <p class="suave">Nível <strong>{{ plano.nivel }} · {{ NOMES_NIVEL[plano.nivel] }}</strong> · {{ plano.dias_por_semana }} {{ 'dia' if plano.dias_por_semana == 1 else 'dias' }} por semana · {{ plano.minutos_por_dia }} min por dia</p>
+
+  <div class="cartao">
+    <div class="semana grande">
+      {% for i in range(7) %}<span class="{{ 'feito' if i in dias }} {{ 'hoje' if i == hoje }}">{{ DIAS_SEMANA[i] }}</span>{% endfor %}
+    </div>
+    <p class="suave">{{ feitas }} de {{ total }} atividades concluídas</p>
+    <div class="barra"><div style="width: {{ (feitas * 100 // total) if total else 0 }}%"></div></div>
+  </div>
+
+  {% for i in range(7) if i in dias %}
+  <div class="cartao">
+    <h3>{{ ['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'][i] }}{% if i == hoje %} <span class="selo">hoje</span>{% endif %}</h3>
+    {% for item in dias[i] %}
+      <div class="linha-atividade">
+        <div>
+          <strong>{{ item.titulo }}</strong>
+          <span class="tag">{{ NOMES_TIPO[item.tipo] }}</span>
+          <span class="suave">+{{ item.xp }} XP</span>
+        </div>
+        {% if item.feito %}
+          <a href="{{ url_for('atividade', item_id=item.id) }}" class="botao botao-contorno-escuro">✓ Concluída</a>
+        {% else %}
+          <a href="{{ url_for('atividade', item_id=item.id) }}" class="botao botao-dourado">Começar</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="cartao">
+    <h3>Ajustar meu plano</h3>
+    <p class="suave">Mudou sua rotina? Crie um novo plano (o plano atual será substituído).</p>
+    {% set dias_padrao = plano.dias_por_semana %}{% set minutos_padrao = plano.minutos_por_dia %}{% set texto_botao = 'Criar novo plano' %}
+    {% include '_form_plano.html' %}
+  </div>
+{% endif %}
+{% endblock %}

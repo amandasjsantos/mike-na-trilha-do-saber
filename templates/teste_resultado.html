@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}Resultado · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<div class="cartao cartao-destaque">
+  <div class="com-mascote">
+    <div>
+      <h1>Teste concluído! 🎉</h1>
+      <p class="suave">Seu nível de inglês é:</p>
+      <p class="nivel-grande"><span>{{ teste.nivel_resultado }}</span> {{ NOMES_NIVEL[teste.nivel_resultado] }}</p>
+      <p class="suave">Você acertou {{ teste.pontuacao }} de 20 questões. Este é o seu ponto de partida na trilha: o plano abaixo será montado com atividades do nível {{ teste.nivel_resultado }}.</p>
+    </div>
+    <img class="mike-img" style="height:300px" src="{{ url_for('static', filename='img/mike_conquistas.png') }}" alt="Mike com o troféu">
+  </div>
+</div>
+
+<div class="cartao">
+  <h2>Monte seu plano de estudos</h2>
+  <p class="suave">Conte quanto tempo você tem. Assim o plano não vira sobrecarga.</p>
+  {% set dias_padrao = 3 %}{% set minutos_padrao = 30 %}{% set texto_botao = 'Criar meu plano de estudos' %}
+  {% include '_form_plano.html' %}
+  <p class="suave"><a href="{{ url_for('teste_intro') }}">Refazer teste</a></p>
+</div>
+{% endblock %}

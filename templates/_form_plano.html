@@ -1,0 +1,14 @@
+<form method="post" action="{{ url_for('plano_criar') }}" class="form-plano">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <label>Quantos dias por semana você quer estudar?
+    <select name="dias">
+      {% for d in range(1, 8) %}<option value="{{ d }}" {% if d == dias_padrao %}selected{% endif %}>{{ d }} {{ 'dia' if d == 1 else 'dias' }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Quanto tempo por dia?
+    <select name="minutos">
+      {% for m in (15, 30, 45, 60) %}<option value="{{ m }}" {% if m == minutos_padrao %}selected{% endif %}>{{ m }} minutos</option>{% endfor %}
+    </select>
+  </label>
+  <button class="botao botao-dourado" type="submit">{{ texto_botao }}</button>
+</form>

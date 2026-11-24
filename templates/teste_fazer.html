@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block titulo %}Teste de Nível · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<form method="post" action="{{ url_for('teste_enviar') }}" id="form-teste" class="cartao">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <div class="topo-teste">
+    <strong>Teste de Nível</strong>
+    <span id="contador">1/{{ questoes|length }}</span>
+  </div>
+  <div class="barra"><div id="barra-teste" style="width: 0%"></div></div>
+
+  {% for q in questoes %}
+  <div class="questao {{ 'ativa' if loop.first }}">
+    <h2>{{ q.enunciado }}</h2>
+    {% for opcao in q.opcoes %}
+      <label class="opcao"><input type="radio" name="q_{{ q.id }}" value="{{ opcao }}"> <span>{{ opcao }}</span></label>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <div class="botoes-teste">
+    <button type="button" id="btn-anterior" class="botao botao-contorno-escuro">Anterior</button>
+    <button type="button" id="btn-proxima" class="botao botao-dourado">Próxima</button>
+    <button type="submit" id="btn-finalizar" class="botao botao-dourado" hidden>Finalizar teste</button>
+  </div>
+</form>
+{% endblock %}

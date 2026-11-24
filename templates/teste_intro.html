@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block titulo %}Teste de Nível · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<div class="cartao cartao-destaque">
+  <div class="com-mascote">
+    <div>
+      <h1>Teste de Nível</h1>
+      <p>Avalie seu conhecimento e descubra seu nível de inglês.</p>
+      <ul class="info">
+        <li>📋 {{ total }} questões de múltipla escolha</li>
+        <li>⏱️ Tempo estimado: 15 minutos</li>
+        <li>🎯 Níveis: A1, A2, B1, B2, C1</li>
+      </ul>
+      <p class="suave">O resultado define o seu plano de estudos personalizado.{% if usuario.nivel_atual %} Seu nível atual é <strong>{{ usuario.nivel_atual }}</strong>; refazer o teste atualiza esse nível.{% endif %}</p>
+      <a href="{{ url_for('teste_fazer') }}" class="botao botao-dourado botao-grande">Começar teste</a>
+    </div>
+    <img class="mike-img" style="height:300px" src="{{ url_for('static', filename='img/mike_explicacoes.png') }}" alt="Mike explicando">
+  </div>
+</div>
+{% endblock %}

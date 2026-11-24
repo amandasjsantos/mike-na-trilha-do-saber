@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mike na Trilha do Saber</title>
+<link rel="icon" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --azul:#0B1F34; --dourado:#D4A017; --amarelo:#E6C76A; --marrom:#7A5230; --cinza:#F5F7FA; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin:0; font-family:'Roboto',Arial,sans-serif; color:var(--azul); background:var(--cinza); }
+  h1,h2,h3,.botao { font-family:'Poppins',Arial,sans-serif; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:14px 8%; background:var(--azul); }
+  header ul, footer ul { list-style:none; margin:0; padding:0; display:flex; gap:28px; }
+  header a:not(.botao), footer a { color:#fff; text-decoration:none; }
+  header a:not(.botao):hover, footer a:hover { color:var(--amarelo); }
+  footer { display:flex; justify-content:space-between; align-items:center; padding:22px 8%; background:var(--azul); color:#C5D0DC; font-size:14px; }
+  .botao { display:inline-block; padding:12px 26px; border-radius:10px; background:var(--dourado); color:var(--azul); font-weight:600; text-decoration:none; }
+  .botao:hover { background:var(--amarelo); }
+  .hero { display:flex; align-items:flex-end; justify-content:space-between; gap:40px; padding:50px 8% 0; background:var(--azul); color:#fff; }
+  .hero-texto { align-self:center; padding-bottom:50px; }
+  .hero h1 { font-size:54px; line-height:1.1; margin:0 0 18px; }
+  .hero p { max-width:480px; font-size:18px; line-height:1.6; color:#D5DDE6; margin:0 0 26px; }
+  .palco { position:relative; width:340px; height:400px; display:flex; align-items:flex-end; justify-content:center; flex-shrink:0; }
+  .palco::before { content:''; position:absolute; bottom:0; width:310px; height:310px; border-radius:50%; background:var(--amarelo); }
+  .palco img { position:relative; height:390px; }
+  .secao { padding:60px 8%; }
+  .secao > h3 { font-size:28px; text-align:center; margin:0 0 24px; }
+  .sobre p { max-width:820px; margin:0 auto 16px; font-size:17px; line-height:1.7; }
+  .recursos { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; padding:0 8%; margin-top:30px; }
+  .recursos div { background:#fff; border-radius:14px; padding:22px; box-shadow:0 4px 14px rgba(11,31,52,.12); }
+  .recursos span { font-size:30px; }
+  .recursos h3 { margin:8px 0 6px; font-size:15px; }
+  .recursos p { margin:0; color:#5B6B7B; font-size:14px; }
+  .faq details { max-width:820px; margin:0 auto 12px; background:#fff; border-radius:12px; padding:16px 20px; box-shadow:0 2px 8px rgba(11,31,52,.08); }
+  .faq summary { cursor:pointer; font-family:'Poppins',Arial,sans-serif; font-weight:600; }
+  .faq details[open] summary { color:var(--marrom); }
+  .faq details p, .faq details ul { margin:12px 0 0; line-height:1.6; color:#5B6B7B; }
+</style>
+</head>
+<body>
+<header>
+  <img src="logo-negativa.png" alt="Mike na Trilha do Saber" height="46">
+  <nav>
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <section class="hero" id="inicio">
+    <div class="hero-texto">
+      <h1>Seu futuro<br>fala inglês!</h1>
+      <p>Plataforma educacional gratuita para aprender inglês com testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e o Mike, seu mascote e assistente virtual.</p>
+      <a class="botao" href="">Acessar a plataforma</a>
+    </div>
+    <div class="palco"><img src="mike_boas_vindas.png" alt="Mike acenando: Olá!"></div>
+  </section>
+
+  <section class="secao sobre" id="sobre">
+    <h3>Sobre o Mike na Trilha do Saber</h3>
+    <p>O Mike na Trilha do Saber é uma plataforma web educacional gratuita que utiliza tecnologia e inteligência artificial para ajudar pessoas a aprender inglês de forma acessível, organizada e motivadora. Por meio de testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e suporte inteligente, o projeto busca tornar o aprendizado mais eficiente.</p>
+    <p>Nossa visão é democratizar o acesso ao ensino de inglês, oferecendo uma ferramenta gratuita que ajude estudantes a superar dificuldades de organização, falta de motivação e limitações financeiras. Em cada passo da jornada, o Mike, nosso mascote e assistente virtual, acompanha o aluno e torna o aprendizado mais leve e divertido.</p>
+  </section>
+
+  <section class="recursos" id="recursos">
+    <div><span>📝</span><h3>Testes de Nível</h3><p>Descubra seu nível, de A1 a C1.</p></div>
+    <div><span>📅</span><h3>Planos Personalizados</h3><p>Estude no seu ritmo.</p></div>
+    <div><span>📈</span><h3>Progresso</h3><p>Acompanhe sua evolução.</p></div>
+    <div><span>🏅</span><h3>Gamificação</h3><p>XP, sequências e conquistas.</p></div>
+    <div><span>🐶</span><h3>Assistente Mike</h3><p>Tire dúvidas de inglês.</p></div>
+  </section>
+
+  <section class="secao faq" id="duvidas">
+    <h3>Dúvidas Frequentes</h3>
+
+    <details>
+      <summary>Quem é o Mike?</summary>
+      <p>O Mike é o mascote e assistente virtual da plataforma. Ele atua como um companheiro de estudos amigável, auxiliando os alunos durante toda a sua jornada.</p>
+    </details>
+
+    <details>
+      <summary>Qual é o diferencial do projeto?</summary>
+      <p>É uma plataforma web educacional gratuita, que utiliza tecnologia e inteligência artificial, criada com o intuito de ensinar inglês, reunindo em um só lugar testes de nível, planos de estudo personalizados, acompanhamento do progresso, gamificação e suporte inteligente.</p>
+    </details>
+
+    <details>
+      <summary>O projeto é gratuito?</summary>
+      <p>Sim, 100% gratuito.</p>
+    </details>
+
+    <details>
+      <summary>Quais tecnologias foram utilizadas?</summary>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python + Flask</li>
+        <li>SQLite</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Qual é o foco do ensino de inglês na plataforma?</summary>
+      <p>A plataforma oferece um ensino amplo de inglês, abrangendo situações formais e informais, do dia a dia ao ambiente acadêmico e profissional, sem focar em uma área específica.</p>
+    </details>
+
+    <details>
+      <summary>Como os custos da inteligência artificial serão pagos?</summary>
+      <p>Como o projeto tem um orçamento limitado, o uso da inteligência artificial será reduzido ao necessário para o funcionamento do Mike. Para ajudar a pagar os custos da plataforma, o projeto busca possíveis parcerias com escolas de idiomas e instituições especializadas, como o CIL.</p>
+    </details>
+  </section>
+</main>
+<footer>
+  <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#recursos">Recursos</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+    </ul>
+  <span>© 2026 Mike na Trilha do Saber</span>
+</footer>
+</body>
+</html>

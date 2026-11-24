@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block titulo %}Mike · Mike na Trilha do Saber{% endblock %}
+{% block conteudo_aluno %}
+<div class="cabecalho-mike">
+  <h1>Mike, assistente virtual</h1>
+  <img class="mike-img" style="height:170px" src="{{ url_for('static', filename='img/mike_duvidas.png') }}" alt="Mike com uma dúvida">
+</div>
+<div class="chat cartao">
+  <div id="mensagens" class="chat-mensagens" data-avatar="{{ url_for('static', filename='img/mike_avatar.png') }}">
+    {% macro linha_mike(texto) %}
+      <div class="linha-mike"><img class="avatar-mike" src="{{ url_for('static', filename='img/mike_avatar.png') }}" alt="Mike"><div class="bolha bolha-mike">{{ texto }}</div></div>
+    {% endmacro %}
+    {{ linha_mike('Olá, ' ~ usuario.nome.split()[0] ~ '! 🐾 Posso ajudar com gramática, vocabulário ou escrita. Sobre o que você quer conversar?') }}
+    {% for m in historico %}
+      {% if m.autor == 'mike' %}{{ linha_mike(m.texto) }}
+      {% else %}<div class="bolha bolha-aluno">{{ m.texto }}</div>{% endif %}
+    {% endfor %}
+  </div>
+  <form id="form-chat" class="chat-form" autocomplete="off">
+    <input type="text" id="texto-chat" maxlength="300" placeholder="Digite sua pergunta... (ex.: present perfect)" required>
+    <button type="submit" class="botao botao-dourado">Enviar</button>
+  </form>
+</div>
+<p class="suave">O Mike responde com dicas prontas sobre inglês. A integração com inteligência artificial real é uma próxima etapa do projeto.</p>
+{% endblock %}
