@@ -39,7 +39,7 @@ O projeto tem como objetivo oferecer uma plataforma web educacional gratuita par
 ## 📁 Estrutura do Projeto
 
 ```text
-laboratorio-de-inovacao-iv/
+mike-na-trilha-do-saber/
 │
 ├── app.py                 # Flask: rotas do sistema
 ├── banco.py               # Conexão e comandos do SQLite
