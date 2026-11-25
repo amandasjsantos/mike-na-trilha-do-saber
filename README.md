@@ -122,10 +122,6 @@ A documentação do projeto (planejamento, MVP, especificação técnica e prot�
 | Período | 4º Semestre |
 | Ano | 2026 |
 
-## 📌 Status do Projeto
-
-Versão inicial (MVP) concluída. Próximas etapas: integração do Mike com inteligência artificial e ampliação dos conteúdos.
-
 ## 📄 Licença
 
 Este projeto foi desenvolvido para fins acadêmicos.
